@@ -1,0 +1,6 @@
+/* src/index.css atau src/tailwind.css */
+@import url('https://fonts.googleapis.com/css2?family=Fasthand&family=Yatra+One&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
