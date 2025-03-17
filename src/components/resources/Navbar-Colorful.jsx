@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
-import LogoArtro from "../../src2/resources/Logo + typograph.png";
+import LogoArtro from "../../src2/resources/Logo_typograph.png";
 import PanahBawah from "../../src2/resources/panah bawah.png";
 import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "../../utils/supabaseClient";
