@@ -62,6 +62,7 @@ function UserGallery() {
 
   return (
     <>
+      <title>Home - Artropolis 2024</title>
       {/* Memasukkan Navbar */}
       <Navbar visitorName={visitorName} />
 
@@ -77,31 +78,27 @@ function UserGallery() {
         <br />
         <br />
         {/* Section 1 */}
+        <br />
         <section id="Home" className="relative z-10 text-center">
-          <div className="Group1000005017 w-[994.25px] h-[562.28px] mx-auto">
+          <div className="w-full max-w-5xl px-4 mx-auto">
             <img
-              className="DigitalArtExText2 w-[936px] h-[417.5px] mx-auto transition-transform duration-300 hover:scale-105 "
+              className="w-full max-w-[936px] h-auto mx-auto transition-transform duration-300 hover:scale-105"
               src={ArtEx}
               alt="Digital Art Exhibition"
             />
 
-            <br />
-            <div className="Frame1111 w-[383px] h-24 mx-auto bg-gradient-to-b from-[#32779a] to-[#61acb7] rounded-[49px] hover:scale-110 hover:shadow-xl shadow flex justify-center items-center gap-2.5 transition-all duration-300 ease-in-out">
-              <img
-                className="MulaiMenjelajah1 w-[29px] h-[31px]"
-                src={MM}
-                alt=""
-              />
+            <div className="mt-6 w-[15rem] max-w-s mx-auto bg-gradient-to-b from-[#32779a] to-[#61acb7] rounded-full hover:scale-105 hover:shadow-xl shadow flex justify-center items-center gap-1.5 transition-all duration-300 ease-in-out py-3 px-4">
+              <img className="w-4 h-4" src={MM} alt="" />
               <button
-                className="MulaiMenjelajah text-white text-3xl font-normal font-yatra"
+                className="text-white text-lg font-normal font-yatra"
                 onClick={handleScrollUnlock}
               >
                 Mulai Menjelajah!
               </button>
             </div>
-            <br />
+
             <img
-              className="PanahBawha21 w-[33px] h-[35px] mx-auto mt-5 animate-bounce"
+              className="w-5 h-5 md:w-[25px] md:h-[27px] mx-auto mt-8 animate-bounce"
               src={pb2}
               alt="Arrow Down"
             />
