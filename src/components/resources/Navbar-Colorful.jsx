@@ -194,7 +194,7 @@ import { useMediaQuery } from "react-responsive";
 import Cookies from "js-cookie";
 import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "../../utils/supabaseClient";
-import LogoArtro from "../../src2/resources/Logo + typograph.png";
+import LogoArtro from "../../src2/resources/logoartro.png";
 import PanahBawah from "../../src2/resources/panah bawah.png";
 
 const Navbar = () => {
