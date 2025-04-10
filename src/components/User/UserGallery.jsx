@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../../utils/supabaseClient";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../resources/Navbar-Colorful";
 import "../../src2/tailwind.css";
-import colorfull from "../../src2/resources/colorfulbg.png";
 import ArtEx from "../../src2/resources/digital art ex text.png";
 import MM from "../../src2/resources/mulai menjelajah.png";
 import pb2 from "../../src2/resources/panah bawha 2.png";
@@ -13,7 +11,7 @@ function UserGallery() {
   const [karya, setKarya] = useState([]);
   const [loading, setLoading] = useState(true);
   const [visitorName, setVisitorName] = useState("");
-  const [allowScroll, setAllowScroll] = useState(false);
+  // const [allowScroll, setAllowScroll] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,12 +23,12 @@ function UserGallery() {
     }
   }, [navigate]);
 
-  useEffect(() => {
-    document.body.style.overflow = allowScroll ? "auto" : "hidden";
-    return () => {
-      document.body.style.overflow = "auto"; // Reset overflow on component unmount
-    };
-  }, [allowScroll]);
+  // useEffect(() => {
+  //   document.body.style.overflow = allowScroll ? "auto" : "hidden";
+  //   return () => {
+  //     document.body.style.overflow = "auto"; // Reset overflow on component unmount
+  //   };
+  // }, [allowScroll]);
 
   const fetchKarya = async () => {
     setLoading(true);
@@ -56,95 +54,85 @@ function UserGallery() {
   }, []);
 
   const handleScrollUnlock = () => {
-    setAllowScroll(true);
     document.getElementById("Fotografi").scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <>
       <title>Home - Artropolis 2024</title>
-      {/* Memasukkan Navbar */}
-      <Navbar visitorName={visitorName} />
-
-      {/* Main content */}
-      <div className="min-w-screen min-h-screen pt-[130px] px-6 font-yatra relative bg-repeat-y">
-        {/* Background */}
-        <div className="absolute right-0 left-0 top-0 z-0 bg-cover bg-repeat-y bg-top">
-          <img src={colorfull} alt="" />
-        </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+      {/* Main Content */}
+      <div className="min-h-screen pt-[130px] px-6 font-yatra relative bg-repeat-y bg-cover bg-top">
         {/* Section 1 */}
-        <br />
-        <section id="Home" className="relative z-10 text-center">
-          <div className="w-full max-w-5xl px-4 mx-auto">
+        <section id="Home" className="relative flex z-10 text-center justify-center items-center pt-28">
+        <div className="max-w-2xl mx-auto">
             <img
-              className="w-full max-w-[936px] h-auto mx-auto transition-transform duration-300 hover:scale-105"
+              className="w-full max-w-[120%] h-auto mx-auto transition-transform duration-300 hover:scale-105"
               src={ArtEx}
               alt="Digital Art Exhibition"
             />
 
-            <div className="mt-6 w-[15rem] max-w-s mx-auto bg-gradient-to-b from-[#32779a] to-[#61acb7] rounded-full hover:scale-105 hover:shadow-xl shadow flex justify-center items-center gap-1.5 transition-all duration-300 ease-in-out py-3 px-4">
-              <img className="w-4 h-4" src={MM} alt="" />
+            <div className="mt-6 w-[15rem] h-[4rem] xl:w-[20rem] xl:h-[5rem] mx-auto bg-gradient-to-b from-[#32779a] to-[#61acb7] rounded-full hover:scale-105 hover:shadow-xl shadow flex justify-center items-center cursor-pointer gap-2 transition-all duration-300 ease-in-out py-3 px-4" onClick={handleScrollUnlock}>
+              <img className="w-6 md:w-8 h-auto" src={MM} alt="Mulai Menjelajah Icon" />
               <button
-                className="text-white text-lg font-normal font-yatra"
-                onClick={handleScrollUnlock}
+                className="text-white text-lg xl:text-2xl font-normal"
               >
                 Mulai Menjelajah!
               </button>
             </div>
 
             <img
-              className="w-5 h-5 md:w-[25px] md:h-[27px] mx-auto mt-8 animate-bounce"
+              className="w-5 h-5 md:w-6 md:h-6 mx-auto mt-8 animate-bounce"
               src={pb2}
-              alt="Arrow Down"
+              alt="Scroll Down"
             />
           </div>
         </section>
 
         {/* Section 2 */}
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <section id="Fotografi" className="relative z-10 pt-20 px-10">
-          <br />
-          <br />
-          <br />
+        <section
+          id="Fotografi"
+          className="relative z-10 py-52 px-4 md:px-10 xl:px-20"
+        >
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-left text-3xl md:text-4xl text-[#32779a] font-semibold mb-6">
+              Karya Fotografi
+            </h2>
 
-          {/* Contoh daftar karya */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-            {loading ? (
-              <div className="flex justify-center items-center h-64 col-span-full">
-                <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
-              </div>
-            ) : karya.length > 0 ? (
-              karya.map((item) => (
-                <div
-                  key={item.id_karya}
-                  className="bg-gray-100 p-4 rounded-lg shadow"
-                >
-                  <img
-                    src={item.image_url}
-                    alt={item.judul_karya}
-                    className="w-full h-48 object-cover rounded-t-lg"
-                  />
-                  <h3 className="text-lg font-bold mt-2">{item.judul_karya}</h3>
-                  <p className="text-sm text-gray-600">{item.deskripsi}</p>
-                  <p className="text-sm text-gray-500">Ukuran: {item.ukuran}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {loading ? (
+                <div className="flex justify-center items-center h-64 col-span-full">
+                  <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
                 </div>
-              ))
-            ) : (
-              <p className="text-center col-span-full">
-                Belum ada karya yang tersedia.
-              </p>
-            )}
+              ) : karya.length > 0 ? (
+                karya.map((item) => (
+                  <div
+                    key={item.id_karya}
+                    className="bg-white/70 backdrop-blur-md p-4 rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
+                  >
+                    <img
+                      src={item.image_url}
+                      alt={item.judul_karya}
+                      className="w-full h-48 object-cover rounded-t-lg"
+                    />
+                    <div className="mt-3">
+                      <h3 className="text-lg font-bold text-[#00525e]">
+                        {item.judul_karya}
+                      </h3>
+                      <p className="text-sm text-gray-700 mt-1">
+                        {item.deskripsi}
+                      </p>
+                      <p className="text-sm text-gray-500 mt-1">
+                        Ukuran: {item.ukuran}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="text-center text-gray-500 col-span-full">
+                  Belum ada karya yang tersedia.
+                </p>
+              )}
+            </div>
           </div>
         </section>
       </div>

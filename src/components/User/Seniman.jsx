@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../../utils/supabaseClient";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../resources/Navbar-Colorful";
 import "../../src2/tailwind.css";
-import colorfull from "../../src2/resources/colorfulbg.png";
 import dafsen from "../../src2/resources/daftar seniman.png";
 import MM from "../../src2/resources/mulai menjelajah.png";
 import pb2 from "../../src2/resources/panah bawha 2.png";
@@ -14,6 +12,10 @@ function Seniman() {
   const [loading, setLoading] = useState(true);
   const [visitorName, setVisitorName] = useState("");
   const navigate = useNavigate();
+
+  const handleScrollUnlock = () => {
+    document.getElementById("Seniman").scrollIntoView({ behavior: "smooth" });
+  };
 
   // Cek nama pengunjung dari cookie
   useEffect(() => {
@@ -73,59 +75,41 @@ function Seniman() {
 
   return (
     <>
-      {/* Navbar */}
-      <Navbar visitorName={visitorName} />
+
 
       {/* Main content */}
       <div className="min-w-screen min-h-screen pt-[130px] px-6 font-yatra relative bg-repeat-y">
-        {/* Background */}
-        <div className="absolute right-0 left-0 top-0 z-0 bg-cover bg-repeat-y bg-top">
-          <img src={colorfull} alt="Background" />
-        </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
 
         {/* Section 1 */}
-        <section id="Home" className="relative z-10 text-center">
-          <div className="Group1000005017 w-full max-w-[680px] mx-auto">
+        <section id="Home" className="relative z-10 text-center pt-28">
+        <div className="max-w-2xl mx-auto">
             <img
-              className="DigitalArtExText2 w-full h-auto mx-auto transition-transform duration-300 hover:scale-105 mb-6"
+              className="w-full max-w-[70%] h-auto mx-auto transition-transform duration-300 hover:scale-105"
               src={dafsen}
-              alt="Daftar Seniman"
+              alt="Digital Art Exhibition"
             />
 
-            <div className="Frame1111 w-[383px] h-24 mx-auto bg-gradient-to-b from-[#32779a] to-[#61acb7] rounded-[49px] hover:scale-110 hover:shadow-xl shadow flex justify-center items-center gap-2.5 transition-all duration-300 ease-in-out">
-              <img
-                className="MulaiMenjelajah1 w-[29px] h-[31px]"
-                src={MM}
-                alt="Mulai Menjelajah"
-              />
+            <div className="mt-6 w-[15rem] h-[4rem] xl:w-[20rem] xl:h-[5rem] mx-auto bg-gradient-to-b from-[#32779a] to-[#61acb7] rounded-full hover:scale-105 hover:shadow-xl shadow flex justify-center items-center cursor-pointer gap-2 transition-all duration-300 ease-in-out py-3 px-4" onClick={handleScrollUnlock}>
+              <img className="w-8 h-auto" src={MM} alt="Mulai Menjelajah Icon" />
               <button
-                className="MulaiMenjelajah text-white text-3xl font-normal font-yatra"
-                onClick={handleScrollToSection}
+                className="text-white text-lg xl:text-2xl font-normal"
               >
-                Lihat Seniman
+                Mulai Menjelajah!
               </button>
             </div>
-            <br />
-            <br />
+
             <img
-              className="PanahBawha21 w-[33px] h-[35px] mx-auto mt-5 animate-bounce"
+              className="w-5 h-5 md:w-6 md:h-6 mx-auto mt-8 animate-bounce"
               src={pb2}
-              alt="Arrow Down"
+              alt="Scroll Down"
             />
           </div>
         </section>
 
-        <section id="SenimanSection" className="relative z-10 pt-20 px-10">
-          <br />
-          <br />
-          <br />
-          <br />
+        <section id="Seniman" className="py-52 px-4 md:px-10 xl:px-20">
+        <h2 className="text-left text-3xl md:text-4xl text-[#32779a] font-semibold mb-6">
+              Para Seniman
+            </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
             {loading ? (
               <div className="flex justify-center items-center h-64 col-span-full">
@@ -170,7 +154,7 @@ function Seniman() {
           {/* Modal */}
           {modalData && (
             <div
-              className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50"
+              className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-100"
               onClick={closeModal}
             >
               <div

@@ -42,13 +42,15 @@ function VisitorForm() {
       window.location.reload();
     } catch (err) {
       console.error("Unexpected error:", err.message);
-      alert("Terjadi kesalahan tak terduga saat menyimpan data. Silakan coba lagi.");
+      alert(
+        "Terjadi kesalahan tak terduga saat menyimpan data. Silakan coba lagi."
+      );
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen relative px-4">
-          <title>Welcome! - Artropolis 2024</title>
+      <title>Welcome! - Artropolis 2024</title>
       {/* Background Image */}
       <img
         src={colorful}
@@ -72,31 +74,34 @@ function VisitorForm() {
 
         {/* Form Input Nama */}
         <form
-  onSubmit={handleSubmit}
-  className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-2"
->
-  {/* Input Nama */}
-  <input
-  type="text"
-  value={name}
-  onChange={(e) => setName(e.target.value)}
-  placeholder="Masukkan nama kamu"
-  className={`w-full sm:flex-grow px-4 py-[14px] text-[clamp(20px,3vw,24px)] text-center font-yatra outline-none rounded-[20px] shadow backdrop-blur-sm placeholder-gray-400 bg-white/80
-    ${name.length > 0 ? "text-[#32779a] border-[#32779a]/50" : "text-[#ededed] border-[#e6e6e6]"}
+          onSubmit={handleSubmit}
+          className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-2"
+        >
+          {/* Input Nama */}
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Masukkan nama kamu"
+            className={`w-full sm:flex-grow px-4 py-[14px] text-[clamp(20px,3vw,24px)] text-center font-yatra outline-none rounded-[20px] shadow backdrop-blur-sm placeholder-gray-400 bg-white/80
+    ${
+      name.length > 0
+        ? "text-[#32779a] border-[#32779a]/50"
+        : "text-[#ededed] border-[#e6e6e6]"
+    }
     border-2 transition-all duration-300 caret-[#32779a]
 
   `}
-/>
+          />
 
-  {/* Tombol Submit */}
-  <button
-    type="submit"
-    className="w-1/2 sm:w-[225px] py-3 bg-[#32779a] text-white text-[clamp(18px,2.5vw,24px)] font-yatra rounded-[20px] hover:bg-[#286085] transition-all duration-300"
-  >
-    Submit
-  </button>
-</form>
-
+          {/* Tombol Submit */}
+          <button
+            type="submit"
+            className="w-1/2 sm:w-[225px] py-3 bg-[#32779a] text-white text-[clamp(18px,2.5vw,24px)] font-yatra rounded-[20px] hover:bg-[#286085] transition-all duration-300"
+          >
+            Submit
+          </button>
+        </form>
       </div>
     </div>
   );

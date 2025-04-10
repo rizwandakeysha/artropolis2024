@@ -29,9 +29,9 @@ const AdminDashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-3xl w-full">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Admin Dashboard</h1>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="bg-white/45 shadow-lg rounded-lg p-8 max-w-3xl w-full">
+        <h1 className="text-3xl font-bold text-center text-green-800 mb-8 font-yatra">Admin Dashboard</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card Karya */}

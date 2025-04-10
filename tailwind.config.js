@@ -1,4 +1,3 @@
-// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
@@ -6,8 +5,8 @@ module.exports = {
     ],
     theme: {
         extend: {
-            animation: {
-                bounce: 'bounce 1s infinite',
+            fontFamily: {
+                yatra: ['"Yatra One"', 'sans-serif'], // Tambahkan di sini
             },
             keyframes: {
                 bounce: {
@@ -17,14 +16,22 @@ module.exports = {
                 'fade-in': {
                     '0%': { opacity: '0' },
                     '100%': { opacity: '1' },
-                }
-            },
-            fontFamily: {
-                yatra: ['"Yatra One"', 'sans-serif'], // Menambahkan font baru dengan nama 'yatra'
+                },
+                'fade-in-up': {
+                    '0%': { opacity: '0', transform: 'translateY(20px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
+                fadeInSlide: {
+                    '0%': { opacity: 0, transform: 'translateY(-10px)' },
+                    '100%': { opacity: 1, transform: 'translateY(0)' },
+                },
             },
             animation: {
+                bounce: 'bounce 1s infinite',
                 'fade-in': 'fade-in 1s ease-out forwards',
-            }
+                'fade-in-up': 'fade-in-up 1s ease-out forwards',
+                fadeInSlide: 'fadeInSlide 0.3s ease-out forwards',
+            },
         },
     },
     plugins: [],

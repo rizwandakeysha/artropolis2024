@@ -20,6 +20,7 @@ import Seniman from "./components/User/Seniman";
 import KategoriPage from "./components/User/KategoriPage";
 import DetailKarya from "./components/User/DetailKarya";
 import NotFound from "./components/NotFound"; // Halaman 404
+import Layout1 from "./components/resources/Layout"; // Layout yang berisi background
 
 function App() {
   // Fungsi untuk mengecek apakah cookies 'visitorName' sudah ada
@@ -35,72 +36,74 @@ function App() {
 
   return (
     <Router>
-      <Routes>
-        {/* Halaman Utama */}
-        {!visitorName ? (
-          <Route path="/" element={<VisitorForm />} />
-        ) : (
-          <Route path="/" element={<UserGallery />} />
-        )}
+      <Layout1>
+        <Routes>
+          {/* Halaman Utama */}
+          {!visitorName ? (
+            <Route path="/ddd" element={<VisitorForm />} />
+          ) : (
+            <Route path="/" element={<UserGallery />} />
+          )}
 
-        <Route path="/visitorForm" element={<VisitorForm />} />
+          <Route path="/visitorForm" element={<VisitorForm />} />
 
-        {/* Halaman khusus admin */}
-        <Route path="/admin-login" element={<AdminLogin />} />
-        <Route
-          path="/admin"
-          element={
-            <PrivateRoute>
-              <AdminDashboard />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/admin/add-admin"
-          element={
-            <PrivateRoute>
-              <AddAdmin />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/admin/karya"
-          element={
-            <PrivateRoute>
-              <AdminKarya />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/admin/pembuat"
-          element={
-            <PrivateRoute>
-              <AdminPembuat />
-            </PrivateRoute>
-          }
-        />
-        <Route path="/admin/visitor" element={<VisitorList />} />
+          {/* Halaman khusus admin */}
+          <Route path="/admin-login" element={<AdminLogin />} />
+          <Route
+            path="/admin"
+            element={
+              <PrivateRoute>
+                <AdminDashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/add-admin"
+            element={
+              <PrivateRoute>
+                <AddAdmin />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/karya"
+            element={
+              <PrivateRoute>
+                <AdminKarya />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/pembuat"
+            element={
+              <PrivateRoute>
+                <AdminPembuat />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/admin/visitor" element={<VisitorList />} />
 
-        {/* Halaman Tambahan */}
-        <Route
-          path="/glimpse-of-artropolis"
-          element={<GlimpseOfArtropolis />}
-        />
-        <Route path="/champions" element={<Champions />} />
-        <Route path="/seniman" element={<Seniman />} />
+          {/* Halaman Tambahan */}
+          <Route
+            path="/glimpse-of-artropolis"
+            element={<GlimpseOfArtropolis />}
+          />
+          <Route path="/champions" element={<Champions />} />
+          <Route path="/seniman" element={<Seniman />} />
 
-        {/* Rute dinamis dengan satu parameter kategori */}
-        <Route path="/:kategori" element={<KategoriPage />} />        
+          {/* Rute dinamis dengan satu parameter kategori */}
+          <Route path="/:kategori" element={<KategoriPage />} />
 
-        {/* Halaman Detail Karya */}
-        <Route path="/:kategori/:judul_karya" element={<DetailKarya />} />
+          {/* Halaman Detail Karya */}
+          <Route path="/:kategori/:judul_karya" element={<DetailKarya />} />
 
-        {/* Route wildcard untuk menangani path lainnya */}
-        <Route path="*" element={<NotFound />} />
+          {/* Route wildcard untuk menangani path lainnya */}
+          <Route path="*" element={<NotFound />} />
 
-        {/* Halaman 404 */}
-        <Route path="/404" element={<NotFound />} />
-      </Routes>
+          {/* Halaman 404 */}
+          <Route path="/404" element={<NotFound />} />
+        </Routes>
+      </Layout1>
     </Router>
   );
 }
