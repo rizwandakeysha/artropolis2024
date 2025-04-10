@@ -72,7 +72,7 @@ function UserGallery() {
             />
 
             <div className="mt-6 w-[15rem] h-[4rem] xl:w-[20rem] xl:h-[5rem] mx-auto bg-gradient-to-b from-[#32779a] to-[#61acb7] rounded-full hover:scale-105 hover:shadow-xl shadow flex justify-center items-center cursor-pointer gap-2 transition-all duration-300 ease-in-out py-3 px-4" onClick={handleScrollUnlock}>
-              <img className="w-6 md:w-8 h-auto" src={MM} alt="Mulai Menjelajah Icon" />
+              <img className="w-6 md:w-8 h-auto" src={MM} alt="Mulai Menjelajah" />
               <button
                 className="text-white text-lg xl:text-2xl font-normal"
               >
@@ -94,10 +94,12 @@ function UserGallery() {
           className="relative z-10 py-52 px-4 md:px-10 xl:px-20"
         >
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-left text-3xl md:text-4xl text-[#32779a] font-semibold mb-6">
-              Karya Fotografi
+            <h2 className="text-left text-3xl md:text-4xl text-[#32779a] mb-2">
+              Terabadikan Indah melalui <span className="font-semibold text-[#236587] underline cursor-pointer" onClick={() => navigate("/kategori/fotografi")}>Fotografi</span>
             </h2>
-
+            <h4 className="text-left text-xl md:text-xl text-[#B2B4B6] mb-6">
+            Momen-momen kehidupan terabadikan indah dalam potret kamera
+            </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {loading ? (
                 <div className="flex justify-center items-center h-64 col-span-full">
