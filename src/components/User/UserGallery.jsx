@@ -63,19 +63,27 @@ function UserGallery() {
       {/* Main Content */}
       <div className="min-h-screen pt-[130px] px-6 font-yatra relative bg-repeat-y bg-cover bg-top">
         {/* Section 1 */}
-        <section id="Home" className="relative flex z-10 text-center justify-center items-center pt-28">
-        <div className="max-w-2xl mx-auto">
+        <section
+          id="Home"
+          className="relative flex z-10 text-center justify-center items-center pt-28"
+        >
+          <div className="max-w-2xl mx-auto">
             <img
               className="w-full max-w-[120%] h-auto mx-auto transition-transform duration-300 hover:scale-105"
               src={ArtEx}
               alt="Digital Art Exhibition"
             />
 
-            <div className="mt-6 w-[15rem] h-[4rem] xl:w-[20rem] xl:h-[5rem] mx-auto bg-gradient-to-b from-[#32779a] to-[#61acb7] rounded-full hover:scale-105 hover:shadow-xl shadow flex justify-center items-center cursor-pointer gap-2 transition-all duration-300 ease-in-out py-3 px-4" onClick={handleScrollUnlock}>
-              <img className="w-6 md:w-8 h-auto" src={MM} alt="Mulai Menjelajah" />
-              <button
-                className="text-white text-lg xl:text-2xl font-normal"
-              >
+            <div
+              className="mt-6 w-[15rem] h-[4rem] xl:w-[20rem] xl:h-[5rem] mx-auto bg-gradient-to-b from-[#32779a] to-[#61acb7] rounded-full hover:scale-105 hover:shadow-xl shadow flex justify-center items-center cursor-pointer gap-2 transition-all duration-300 ease-in-out py-3 px-4"
+              onClick={handleScrollUnlock}
+            >
+              <img
+                className="w-6 md:w-8 h-auto"
+                src={MM}
+                alt="Mulai Menjelajah"
+              />
+              <button className="text-white text-lg xl:text-2xl font-normal">
                 Mulai Menjelajah!
               </button>
             </div>
@@ -95,38 +103,40 @@ function UserGallery() {
         >
           <div className="max-w-7xl mx-auto">
             <h2 className="text-left text-3xl md:text-4xl text-[#32779a] mb-2">
-              Terabadikan Indah melalui <span className="font-semibold text-[#236587] underline cursor-pointer" onClick={() => navigate("/kategori/fotografi")}>Fotografi</span>
+              {" "}
+              <span
+                className="font-semibold text-[#236587] underline cursor-pointer"
+                onClick={() => navigate("/kategori/fotografi")}
+              >
+                Fotografi
+              </span>
             </h2>
-            <h4 className="text-left text-xl md:text-xl text-[#B2B4B6] mb-6">
-            Momen-momen kehidupan terabadikan indah dalam potret kamera
+            <h4 className="text-left text-md md:text-xl text-[#818181] lg:text-[#B2B4B6] mb-6">
+              Momen-momen kehidupan terabadikan indah dalam potret kamera
             </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {loading ? (
                 <div className="flex justify-center items-center h-64 col-span-full">
-                  <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+                  <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-[#1d5892]"></div>
                 </div>
               ) : karya.length > 0 ? (
                 karya.map((item) => (
                   <div
                     key={item.id_karya}
-                    className="bg-white/70 backdrop-blur-md p-4 rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
+                    className="w-[300px] h-[250px] px-4 py-[15px] bg-gradient-to-br from-white/40 to-white/0 rounded-[20px] outline outline-[3.5px] outline-black/50 backdrop-blur-2xl flex justify-center items-center"
                   >
                     <img
                       src={item.image_url}
                       alt={item.judul_karya}
-                      className="w-full h-48 object-cover rounded-t-lg"
+                      className="w-full h-full object-cover rounded-[15px]"
                     />
-                    <div className="mt-3">
-                      <h3 className="text-lg font-bold text-[#00525e]">
-                        {item.judul_karya}
-                      </h3>
-                      <p className="text-sm text-gray-700 mt-1">
-                        {item.deskripsi}
-                      </p>
-                      <p className="text-sm text-gray-500 mt-1">
-                        Ukuran: {item.ukuran}
-                      </p>
-                    </div>
+                    {/* 
+  <div className="mt-3">
+    <h3 className="text-lg font-bold text-[#00525e]">{item.judul_karya}</h3>
+    <p className="text-sm text-gray-700 mt-1">{item.deskripsi}</p>
+    <p className="text-sm text-gray-500 mt-1">Ukuran: {item.ukuran}</p>
+  </div>
+  */}
                   </div>
                 ))
               ) : (
