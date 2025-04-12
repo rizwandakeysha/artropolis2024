@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../utils/supabaseClient";
-import colorful from "../src2/resources/bg_colorful.png";
+import colorful from "../src2/resources/visitor.png";
 import ArtEx from "../src2/resources/digital art ex text.png";
 
 function VisitorForm() {
@@ -54,7 +54,7 @@ function VisitorForm() {
       {/* Background Image */}
       <img
         src={colorful}
-        className="absolute right-0 left-0 top-0 z-0 w-full h-full object-cover"
+        className="bg-contain md:bg-cover md:h-0 absolute right-0 left-0 top-0 z-0 w-full h-full"
         alt=""
       />
 
