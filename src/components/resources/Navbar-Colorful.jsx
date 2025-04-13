@@ -14,10 +14,12 @@ const Navbar = () => {
   const visitorName = Cookies.get("visitorName") || "Visitor";
   const [categories, setCategories] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false); // State untuk sub-dropdown kategori
   const [isVisitorDropdownOpen, setIsVisitorDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const dropdownRef = useRef(null);
+  const categoryDropdownRef = useRef(null); // Ref untuk sub-dropdown kategori
   const visitorDropdownRef = useRef(null);
 
   // Fetch kategori dari Supabase
@@ -38,11 +40,31 @@ const Navbar = () => {
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(e.target) &&
+        categoryDropdownRef.current &&
+        !categoryDropdownRef.current.contains(e.target) &&
         visitorDropdownRef.current &&
         !visitorDropdownRef.current.contains(e.target)
       ) {
         setIsDropdownOpen(false);
+        setIsCategoryDropdownOpen(false);
         setIsVisitorDropdownOpen(false);
+      } else if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target) &&
+        visitorDropdownRef.current &&
+        !visitorDropdownRef.current.contains(e.target) &&
+        !categoryDropdownRef.current?.contains(e.target) // Tambahkan kondisi ini
+      ) {
+        setIsDropdownOpen(false);
+        setIsVisitorDropdownOpen(false);
+      } else if (
+        categoryDropdownRef.current &&
+        !categoryDropdownRef.current.contains(e.target) &&
+        dropdownRef.current &&
+        dropdownRef.current.contains(e.target) &&
+        !e.target.closest('[aria-controls="category-dropdown"]') // Tambahkan kondisi ini
+      ) {
+        setIsCategoryDropdownOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -89,11 +111,11 @@ const Navbar = () => {
           <div
             className="px-7 h-8 bg-gradient-to-br from-zinc-300/30 to-neutral-200/30 rounded-b-lg border-l-[0.3125rem] border-r-[0.25rem] border-b-[0.25rem] border-gray-200/40 backdrop-blur-[0.81px] flex justify-center items-center cursor-pointer"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          ><br />
+          >
             <img className="w-4 h-3" src={hamburger} alt="Hamburger" />
           </div>
 
-          {/* Isi Dropdown */}
+          {/* Isi Dropdown Utama */}
           {isDropdownOpen && (
             <div
               ref={dropdownRef}
@@ -110,31 +132,53 @@ const Navbar = () => {
                 Home
               </div>
 
-              {/* Kategori Karya */}
+              {/* Kategori Karya (Dropdown Trigger) */}
               <div className="py-3 border-b border-gray-300">
-                <div className="text-[#00525e] font-yatra text-base xl:text-sm mb-2 px-3">
+                <div
+                  className="flex justify-between items-center px-3 text-[#00525e] font-yatra text-base xl:text-sm cursor-pointer"
+                  onClick={() =>
+                    setIsCategoryDropdownOpen(!isCategoryDropdownOpen)
+                  }
+                  aria-controls="category-dropdown"
+                  aria-expanded={isCategoryDropdownOpen}
+                >
                   Kategori Karya
+                  <img
+                    className={`w-4 h-3 transition-transform duration-300 ${
+                      isCategoryDropdownOpen ? "rotate-180" : "rotate-0"
+                    }`}
+                    src={PanahBawah}
+                    alt="Dropdown Icon"
+                  />
                 </div>
-                <div className="space-y-1">
-                  {categories.length > 0 ? (
-                    categories.map((cat, idx) => (
-                      <div
-                        key={idx}
-                        className="px-5 py-2 text-sm xl:text-xs font-yatra text-[#00525e] hover:bg-gradient-to-r from-[#32779A] to-[#1e719b] hover:text-white rounded-md cursor-pointer transition duration-200"
-                        onClick={() => {
-                          navigate(`/${cat.nama_kategori}`);
-                          setIsDropdownOpen(false);
-                        }}
-                      >
-                        {cat.nama_kategori}
+
+                {/* Sub-Dropdown Kategori */}
+                {isCategoryDropdownOpen && (
+                  <div
+                    ref={categoryDropdownRef}
+                    className="ml-2 mt-1 space-y-1 animate-fadeInSlide"
+                  >
+                    {categories.length > 0 ? (
+                      categories.map((cat, idx) => (
+                        <div
+                          key={idx}
+                          className="px-5 py-2 text-sm xl:text-xs font-yatra text-[#00525e] hover:bg-gradient-to-r from-[#32779A] to-[#1e719b] hover:text-white rounded-md cursor-pointer transition duration-200"
+                          onClick={() => {
+                            navigate(`/${cat.nama_kategori}`);
+                            setIsDropdownOpen(false);
+                            setIsCategoryDropdownOpen(false);
+                          }}
+                        >
+                          {cat.nama_kategori}
+                        </div>
+                      ))
+                    ) : (
+                      <div className="px-4 py-2 text-gray-500 text-sm">
+                        Tidak ada kategori
                       </div>
-                    ))
-                  ) : (
-                    <div className="px-4 py-2 text-gray-500 text-sm">
-                      Tidak ada kategori
-                    </div>
-                  )}
-                </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               {/* Seniman */}
@@ -182,7 +226,7 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* DESKTOP VIEW */}
+      {/* DESKTOP VIEW (Tidak ada perubahan signifikan) */}
       {isDesktop && (
         <div className="fixed top-0 flex w-full justify-center z-50">
           <div className="w-full max-w-[80%] h-28 mx-auto px-6 bg-gradient-to-r from-[#d7d7d7]/50 to-[#dfdfdf]/50 rounded-[10px] border-4 border-[#e9e9e9]/40 backdrop-blur-lg flex items-center relative mt-[50px] bg-opacity-30">
@@ -197,7 +241,12 @@ const Navbar = () => {
             {/* Menu Navigasi */}
             <div className="flex-grow flex justify-center items-center gap-6 xl:gap-10 text-lg font-normal font-yatra cursor-pointer ">
               {/* Home */}
-              <div className={`${getLinkClass("/")} `} onClick={() => navigate("/")}>Home</div>
+              <div
+                className={`${getLinkClass("/")} `}
+                onClick={() => navigate("/")}
+              >
+                Home
+              </div>
 
               {/* Kategori Karya dengan Dropdown */}
               <div

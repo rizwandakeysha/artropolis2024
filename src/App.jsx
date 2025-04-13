@@ -22,6 +22,8 @@ import DetailKarya from "./components/User/DetailKarya";
 import NotFound from "./components/NotFound";
 import Layout1 from "./components/resources/Layout";
 
+import Fotografi from "./components/User/kategori/Fotografi";
+
 function App() {
   const getCookie = (name) => {
     const match = document.cookie.match(
@@ -40,7 +42,11 @@ function App() {
           <Route
             path="/"
             element={
-              visitorName ? <UserGallery /> : <Navigate to="/visitorForm" replace />
+              visitorName ? (
+                <UserGallery />
+              ) : (
+                <Navigate to="/visitorForm" replace />
+              )
             }
           />
 
@@ -83,15 +89,22 @@ function App() {
           <Route path="/admin/visitor" element={<VisitorList />} />
 
           {/* Halaman user */}
-          <Route path="/glimpse-of-artropolis" element={<GlimpseOfArtropolis />} />
+          <Route
+            path="/glimpse-of-artropolis"
+            element={<GlimpseOfArtropolis />}
+          />
           <Route path="/champions" element={<Champions />} />
           <Route path="/seniman" element={<Seniman />} />
           <Route path="/:kategori" element={<KategoriPage />} />
           <Route path="/:kategori/:judul_karya" element={<DetailKarya />} />
 
+          {/* Halaman Kategori */}
+          <Route path="/fotografi" element={<Fotografi />} />
+
           {/* Halaman 404 */}
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
+          
         </Routes>
       </Layout1>
     </Router>
